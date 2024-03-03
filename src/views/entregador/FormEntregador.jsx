@@ -53,9 +53,10 @@ export default function FormEntregador() {
                             <Form.Group>
 
                                 <Form.Input
+                                    required
                                     fluid
                                     label='DT Nascimento'
-                                    width={5}>
+                                    width={6}>
 
                                     <InputMask
                                         mask="99/99/9999"
@@ -64,6 +65,7 @@ export default function FormEntregador() {
                                 </Form.Input>
 
                                 <Form.Input
+                                    required
                                     fluid
                                     label='Fone Celular'
                                     width={3}
@@ -74,6 +76,7 @@ export default function FormEntregador() {
                                 </Form.Input>
 
                                 <Form.Input
+                                    required
                                     fluid
                                     label='Fone Fixo'
                                     width={3}
@@ -84,12 +87,15 @@ export default function FormEntregador() {
                                 </Form.Input>
 
                                 <Form.Input
+                                    required
                                     fluid
-                                    label='QTD Entregas Realizadas'
+                                    label='Entregas Realizadas'
+                                    width={2}
 
                                 >
                                 </Form.Input>
                                 <Form.Input
+                                    required
                                     fluid
                                     label='Valor Por Frete'
                                     width={2}
@@ -100,12 +106,14 @@ export default function FormEntregador() {
 
                             <Form.Group>
                                 <Form.Input
+                                    required
                                     fluid
                                     label='Rua'
                                     width={12}
                                 >
                                 </Form.Input>
                                 <Form.Input
+                                    required
                                     fluid
                                     label='Número'
                                     width={5}
@@ -114,18 +122,21 @@ export default function FormEntregador() {
                             </Form.Group>
                             <Form.Group>
                                 <Form.Input
+                                    required
                                     fluid
                                     label='Bairro'
                                     width={12}
                                 >
                                 </Form.Input>
                                 <Form.Input
+                                    required
                                     fluid
                                     label='Cidade'
                                     width={5}
                                 >
                                 </Form.Input>
-                                <Form.Input
+                                <Form.Input 
+                                    required
                                     fluid
                                     label='Cep'
                                     width={5}
@@ -134,26 +145,31 @@ export default function FormEntregador() {
                             </Form.Group>
                             <Form.Group>
                                 <FormSelect
+                                    required
                                     fluid
                                     label='UF'
                                     options={['PE','PB']}
-                                    width={15}
+                                    width={16}
                                 />
                             </Form.Group>
                             <Form.Group>
-                                <Form.Input
+                                <Form.Input 
+                                    required
                                     fluid
                                     label='Complemento'
-                                    width={15}
+                                    width={16}
                                 />
                             </Form.Group>
                             <Form.Group inline>
+                                
                                 <label>Ativo</label>
                                 <FormRadio
+                                    
                                     label='Sim'
                                     value='sm'
                                 />
                                 <FormRadio
+                        
                                     label='Não'
                                     value='md'
                                 />

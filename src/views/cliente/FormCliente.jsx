@@ -45,6 +45,7 @@ export default function FormCliente () {
                             <Form.Group>
 
                                 <Form.Input
+                                    required
                                     fluid
                                     label='Fone Celular'
                                     width={6}>
@@ -54,6 +55,7 @@ export default function FormCliente () {
                                 </Form.Input>
 
                                 <Form.Input
+                                    required
                                     fluid
                                     label='Fone Fixo'
                                     width={6}>
@@ -63,6 +65,7 @@ export default function FormCliente () {
                                 </Form.Input>
 
                                 <Form.Input
+                                    required
                                     fluid
                                     label='Data Nascimento'
                                     width={6}

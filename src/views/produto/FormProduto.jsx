@@ -35,6 +35,7 @@ export default function FormProduto () {
                                 </Form.Input>  
                                 
                                 <Form.Input
+                                    required
                                     fluid
                                     label='Código do Produto'
                                     width={6}>
@@ -48,6 +49,7 @@ export default function FormProduto () {
                             <Form.Group>
 
                             <FormTextArea 
+                                required
                                 label='Descrição'
                                  placeholder='Informe a descrição do produto'
                                  width={16}
@@ -57,6 +59,7 @@ export default function FormProduto () {
                              <Form.Group>
 
                                 <Form.Input
+                                    required
                                     fluid
                                     label='Valor Unitário'
                                     width={6}>
@@ -64,22 +67,22 @@ export default function FormProduto () {
                                 </Form.Input>
 
                                 <Form.Input
+                                    required
                                     fluid
                                     label='Tempo de Entrega Mínimo em Minutos'
                                     width={6}
                                 >
                                     <InputMask 
-            
                                         placeholder="30"
                                     /> 
                                 </Form.Input>
                                 <Form.Input
+                                    required
                                     fluid
                                     label='Tempo de Entrega Máximo em Minutos'
                                     width={6}
                                 >
                                     <InputMask 
-            
                                         placeholder="40"
                                     /> 
                                 </Form.Input>
