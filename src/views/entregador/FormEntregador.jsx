@@ -217,9 +217,12 @@ export default function FormEntregador() {
                                     fluid
                                     label='Cep'
                                     width={5}
+                                    >
+                                    <InputMask
+                                    mask="999999-99"
                                     value={enderecoCep}
                                     onChange={e => setEnderecoCep(e.target.value)}
-                                >
+                                />
                                 </Form.Input>
                             </Form.Group>
                             <Form.Group>
