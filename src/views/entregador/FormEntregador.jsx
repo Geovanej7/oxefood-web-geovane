@@ -3,16 +3,20 @@ import axios from "axios";
 import { Segment } from 'semantic-ui-react';
 import InputMask from 'react-input-mask';
 import { Button, Container, Divider, Form, Icon, FormSelect,FormRadio } from 'semantic-ui-react';
-
+const ufList=[
+    {key: 'SP',value:'SP', text:'SP'},
+    {key: 'PB',value:'PB',text:'PB'},
+    {key: 'PE',value:'PE',text:'PE'}
+]
 export default function FormEntregador() {
 
     const [nome, setNome] = useState();
     const [cpf, setCpf] = useState();
     const [rg, setRG] = useState();
-    const [dtNascimento, setDTNascimento] = useState();
+    const [dataNascimento, setDataNascimento] = useState();
     const [foneCelular, setFoneCelular] = useState();
     const [foneFixo, setFoneFixo] = useState();
-    const [entregasRealizadas, setEntregasRealizadas] = useState();
+    const [qtdEntregasRealizadas, setQtdEntregasRealizadas] = useState();
     const [valorFrete, setValorFrete] = useState();
     const [enderecoRua, setEnderecoRua] = useState();
     const [enderecoNumero, setEnderecoNumero] = useState();
@@ -29,10 +33,10 @@ export default function FormEntregador() {
 		     nome: nome,
 		     cpf: cpf,
              rg: rg,
-		     dtNascimento: dtNascimento,
+		     dataNascimento: dataNascimento,
 		     foneCelular: foneCelular,
 		     foneFixo: foneFixo,
-             entregasRealizadas: entregasRealizadas,
+             qtdEntregasRealizadas: qtdEntregasRealizadas,
              valorFrete: valorFrete,
              enderecoRua: enderecoRua,
              enderecoNumero: enderecoNumero,
@@ -116,8 +120,8 @@ export default function FormEntregador() {
                                     <InputMask
                                         mask="99/99/9999"
                                         placeholder="Ex:20/03/1985"
-                                        value={dtNascimento}
-                                        onChange={e => setDTNascimento(e.target.value)}
+                                        value={dataNascimento}
+                                        onChange={e => setDataNascimento(e.target.value)}
                                     />
                                 </Form.Input>
 
@@ -152,8 +156,8 @@ export default function FormEntregador() {
                                     fluid
                                     label='Entregas Realizadas'
                                     width={2}
-                                    value={entregasRealizadas}
-                                    onChange={e => setEntregasRealizadas(e.target.value)}
+                                    value={qtdEntregasRealizadas}
+                                    onChange={e => setQtdEntregasRealizadas(e.target.value)}
 
                                 >
                                 </Form.Input>
@@ -220,13 +224,13 @@ export default function FormEntregador() {
                             </Form.Group>
                             <Form.Group>
                                 <FormSelect
-                                    required
                                     fluid
                                     label='UF'
-                                    options={['PE','PB']}
-                                    width={16}
+                                    options={ufList}
+                                    placeholder='Selecione'
                                     value ={enderecoUf}
-                                    onChange={(e,{value}) => {setEnderecoUf(value)}}
+                                    onChange={(e,{value}) => {
+                                        setEnderecoUf(value)}}
                                 />
                             </Form.Group>
                             <Form.Group>
@@ -240,23 +244,22 @@ export default function FormEntregador() {
                                 />
                             </Form.Group>
                             <Form.Group inline>
-                                
-                                <label>Ativo</label>
-                                <FormRadio
-                                    
-                                    label='sim'
+
+                                <label>Ativo: </label>
+
+                                    <Form.Radio
+                                    label='Sim'
                                     checked={ativo}
                                     onChange={e => setAtivo(true)}
-                                
-                                />
-                                <FormRadio
-                        
+                                     />
+
+                                    <Form.Radio
                                     label='Não'
-                                    checked={ativo}
+                                    checked={!ativo}
                                     onChange={e => setAtivo(false)}
-                                />
-                        
-                            </Form.Group>
+                                    />
+
+                        </Form.Group>
                         </Form>
 
                         <div style={{ marginTop: '4%' }}>
