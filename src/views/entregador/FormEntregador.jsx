@@ -3,6 +3,8 @@ import axios from "axios";
 import { Segment } from 'semantic-ui-react';
 import InputMask from 'react-input-mask';
 import { Button, Container, Divider, Form, Icon, FormSelect,FormRadio } from 'semantic-ui-react';
+import MenuSistema from '../../MenuSistema';
+
 const ufList=[
     {key: 'SP',value:'SP', text:'SP'},
     {key: 'PB',value:'PB',text:'PB'},
@@ -61,12 +63,13 @@ export default function FormEntregador() {
     return (
 
         <div>
+             <MenuSistema />
 
             <div style={{ marginTop: '3%' }}>
 
                 <Container textAlign='justified' >
 
-                    <h2> <span style={{ color: 'darkgray' }}> Cliente &nbsp;<Icon name='angle double right' size="small" /> </span> Cadastro </h2>
+                    <h2> <span style={{ color: 'darkgray' }}> Entregador &nbsp;<Icon name='angle double right' size="small" /> </span> Cadastro </h2>
 
                     <Divider />
 
