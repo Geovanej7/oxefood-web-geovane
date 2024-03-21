@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Segment } from 'semantic-ui-react';
+import { Link } from "react-router-dom";
 import InputMask from 'react-input-mask';
 import { Button, Container, Divider, Form, Icon, FormSelect,FormRadio } from 'semantic-ui-react';
 import MenuSistema from '../../MenuSistema';
@@ -63,7 +64,7 @@ export default function FormEntregador() {
     return (
 
         <div>
-             <MenuSistema />
+              <MenuSistema tela={'entregador'} />
 
             <div style={{ marginTop: '3%' }}>
 
@@ -279,7 +280,8 @@ export default function FormEntregador() {
                                 color='orange'
                             >
                                 <Icon name='reply' />
-                                Voltar
+                                <Link to={'/list-entregador'}>Voltar</Link>
+
                             </Button>
 
                             <Button

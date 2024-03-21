@@ -4,6 +4,8 @@ import { Segment } from 'semantic-ui-react';
 import InputMask from 'react-input-mask';
 import { Button, Container, Divider, Form, Icon, FormTextArea } from 'semantic-ui-react';
 import MenuSistema from '../../MenuSistema';
+import { Link } from "react-router-dom";
+
 
 
 export default function FormProduto () {
@@ -43,7 +45,7 @@ export default function FormProduto () {
 
         <div>
 
-            <MenuSistema />
+            <MenuSistema tela={'produto'} />
 
             <div style={{marginTop: '3%'}}>
 
@@ -152,7 +154,7 @@ export default function FormProduto () {
                                 color='orange'
                             >
                                 <Icon name='reply' />
-                                Listar
+                                <Link to={'/list-produto'}>Voltar</Link>
                             </Button>
                                 
                             <Button
