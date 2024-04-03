@@ -81,7 +81,7 @@ export default function ListCliente() {
                         title='Clique aqui para editar os dados deste cliente'
                         icon
                       >
-                        <Icon name='edit' />
+                        <Link to="/form-cliente" state={{id: cliente.id}} style={{color: 'green'}}> <Icon name='edit' /> </Link>
                       </Button>{" "}
                       &nbsp;
                       <Button
@@ -89,8 +89,7 @@ export default function ListCliente() {
                         circular
                         color='red'
                         title='Clique aqui para remover este cliente'
-                        icon
-                      >
+                        icon>
                         <Icon name='trash' />
                       </Button>
                     </Table.Cell>
