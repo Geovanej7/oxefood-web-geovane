@@ -1,17 +1,53 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Segment } from 'semantic-ui-react';
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import InputMask from 'react-input-mask';
-import { Button, Container, Divider, Form, Icon, FormSelect,FormRadio } from 'semantic-ui-react';
+import { Button, Container, Divider, Form, Icon, FormSelect, FormRadio } from 'semantic-ui-react';
 import MenuSistema from '../../MenuSistema';
 
-const ufList=[
-    {key: 'SP',value:'SP', text:'SP'},
-    {key: 'PB',value:'PB',text:'PB'},
-    {key: 'PE',value:'PE',text:'PE'}
+const ufList = [
+    { key: 'SP', value: 'SP', text: 'SP' },
+    { key: 'PB', value: 'PB', text: 'PB' },
+    { key: 'PE', value: 'PE', text: 'PE' }
 ]
 export default function FormEntregador() {
+    const { state } = useLocation();
+    const [idEntregador, setIdEntregador] = useState();
+
+    useEffect(() => {
+        if (state != null && state.id != null) {
+            axios.get("http://localhost:8080/api/entregador/" + state.id)
+                .then((response) => {
+                    setIdEntregador(response.data.id)
+                    setNome(response.data.nome)
+                    setCpf(response.data.cpf)
+                    setRG(response.data.rg)
+                    setDataNascimento(response.data.dataNascimento)
+                    setFoneCelular(response.data.foneCelular)
+                    setFoneFixo(formatarData(response.data.foneFixo))
+                    setQtdEntregasRealizadas(response.data.qtdEntregasRealizadas)
+                    setValorFrete(response.data.valorFrete)
+                    setEnderecoNumero(response.data.enderecoNumero)
+                    setEnderecoRua(response.data.enderecoRua)
+                    setEnderecoBairro(response.data.enderecoBairro)
+                    setEnderecoCidade(response.data.enderecoCidade)
+                    setEnderecoCep(response.data.enderecoCep)
+                    setEnderecoUf(response.data.enderecoUf)
+                    setEnderecoCompleto(response.data.enderecoCompleto)
+                    setAtivo(response.data.ativo)
+                })
+        }
+    }, [state])
+
+    function formatarData(dataParam) {
+        if (dataParam === null || dataParam === "" || dataParam === undefined) {
+          return ""
+        }
+    
+        let arrayData = dataParam.split("-")
+        return arrayData[2] + "/" + arrayData[1] + "/" + arrayData[0]
+      }
+
 
     const [nome, setNome] = useState();
     const [cpf, setCpf] = useState();
@@ -32,45 +68,62 @@ export default function FormEntregador() {
 
     function salvar() {
 
-		let entregadorRequest = {
-		     nome: nome,
-		     cpf: cpf,
-             rg: rg,
-		     dataNascimento: dataNascimento,
-		     foneCelular: foneCelular,
-		     foneFixo: foneFixo,
-             qtdEntregasRealizadas: qtdEntregasRealizadas,
-             valorFrete: valorFrete,
-             enderecoRua: enderecoRua,
-             enderecoNumero: enderecoNumero,
-             enderecoBairro: enderecoBairro,
-             enderecoCidade: enderecoCidade,
-             enderecoCep: enderecoCep,
-             enderecoUf: enderecoUf,
-             enderecoCompleto: enderecoCompleto,
-             ativo: ativo
-		}
-	
-		axios.post("http://localhost:8080/api/entregador", entregadorRequest)
-		.then((response) => {
-		     console.log('Entregador cadastrado com sucesso.')
-		})
-		.catch((error) => {
-		     console.log('Erro ao incluir o um Entregador.')
-		})
-	}
+        let entregadorRequest = {
+            nome: nome,
+            cpf: cpf,
+            rg: rg,
+            dataNascimento: dataNascimento,
+            foneCelular: foneCelular,
+            foneFixo: foneFixo,
+            qtdEntregasRealizadas: qtdEntregasRealizadas,
+            valorFrete: valorFrete,
+            enderecoRua: enderecoRua,
+            enderecoNumero: enderecoNumero,
+            enderecoBairro: enderecoBairro,
+            enderecoCidade: enderecoCidade,
+            enderecoCep: enderecoCep,
+            enderecoUf: enderecoUf,
+            enderecoCompleto: enderecoCompleto,
+            ativo: ativo
+        }
+
+        if (idEntregador != null) { //Alteração:
+            axios.put("http://localhost:8080/api/entregador/" + idEntregador, entregadorRequest)
+                .then((response) => { console.log('Entregador alterado com sucesso.') })
+                .catch((error) => { console.log('Erro ao alter um Entregador.') })
+        } else { //Cadastro:
+            axios.post("http://localhost:8080/api/entregador", entregadorRequest)
+                .then((response) => { console.log('Entregador cadastrado com sucesso.') })
+                .catch((error) => { console.log('Erro ao incluir o Entregador.') })
+        }
+
+
+        axios.post("http://localhost:8080/api/entregador", entregadorRequest)
+            .then((response) => {
+                console.log('Entregador cadastrado com sucesso.')
+            })
+            .catch((error) => {
+                console.log('Erro ao incluir o um Entregador.')
+            })
+    }
 
 
     return (
 
         <div>
-              <MenuSistema tela={'entregador'} />
+            <MenuSistema tela={'entregador'} />
 
             <div style={{ marginTop: '3%' }}>
 
                 <Container textAlign='justified' >
 
-                    <h2> <span style={{ color: 'darkgray' }}> Entregador &nbsp;<Icon name='angle double right' size="small" /> </span> Cadastro </h2>
+                    {idEntregador === undefined &&
+                        <h2> <span style={{ color: 'darkgray' }}> Entregador &nbsp;<Icon name='angle double right' size="small" /> </span> Cadastro</h2>
+                    }
+                    {idEntregador != undefined &&
+                        <h2> <span style={{ color: 'darkgray' }}> Entregador &nbsp;<Icon name='angle double right' size="small" /> </span> Alteração</h2>
+                    }
+
 
                     <Divider />
 
@@ -86,7 +139,7 @@ export default function FormEntregador() {
                                     label='Nome'
                                     maxLength="100"
                                     value={nome}
-			                        onChange={e => setNome(e.target.value)}
+                                    onChange={e => setNome(e.target.value)}
                                 />
 
                                 <Form.Input
@@ -97,7 +150,7 @@ export default function FormEntregador() {
                                         required
                                         mask="999.999.999-99"
                                         value={cpf}
-				                        onChange={e => setCpf(e.target.value)}
+                                        onChange={e => setCpf(e.target.value)}
                                     />
                                 </Form.Input>
                                 <Form.Input
@@ -203,7 +256,7 @@ export default function FormEntregador() {
                                     fluid
                                     label='Bairro'
                                     width={12}
-                                    value= {enderecoBairro}
+                                    value={enderecoBairro}
                                     onChange={e => setEnderecoBairro(e.target.value)}
                                 >
                                 </Form.Input>
@@ -216,17 +269,17 @@ export default function FormEntregador() {
                                     onChange={e => setEnderecoCidade(e.target.value)}
                                 >
                                 </Form.Input>
-                                <Form.Input 
+                                <Form.Input
                                     required
                                     fluid
                                     label='Cep'
                                     width={5}
-                                    >
+                                >
                                     <InputMask
-                                    mask="999999-99"
-                                    value={enderecoCep}
-                                    onChange={e => setEnderecoCep(e.target.value)}
-                                />
+                                        mask="999999-99"
+                                        value={enderecoCep}
+                                        onChange={e => setEnderecoCep(e.target.value)}
+                                    />
                                 </Form.Input>
                             </Form.Group>
                             <Form.Group>
@@ -235,18 +288,19 @@ export default function FormEntregador() {
                                     label='UF'
                                     options={ufList}
                                     placeholder='Selecione'
-                                    value ={enderecoUf}
-                                    onChange={(e,{value}) => {
-                                        setEnderecoUf(value)}}
+                                    value={enderecoUf}
+                                    onChange={(e, { value }) => {
+                                        setEnderecoUf(value)
+                                    }}
                                 />
                             </Form.Group>
                             <Form.Group>
-                                <Form.Input 
+                                <Form.Input
                                     required
                                     fluid
                                     label='complemento'
                                     width={16}
-                                    value ={enderecoCompleto}
+                                    value={enderecoCompleto}
                                     onChange={e => setEnderecoCompleto(e.target.value)}
                                 />
                             </Form.Group>
@@ -254,23 +308,23 @@ export default function FormEntregador() {
 
                                 <label>Ativo: </label>
 
-                                    <Form.Radio
+                                <Form.Radio
                                     label='Sim'
                                     checked={ativo}
                                     onChange={e => setAtivo(true)}
-                                     />
+                                />
 
-                                    <Form.Radio
+                                <Form.Radio
                                     label='Não'
                                     checked={!ativo}
                                     onChange={e => setAtivo(false)}
-                                    />
+                                />
 
-                        </Form.Group>
+                            </Form.Group>
                         </Form>
 
                         <div style={{ marginTop: '4%' }}>
-
+                            <Link to={'/list-entregador'} >       
                             <Button
                                 type="button"
                                 inverted
@@ -280,9 +334,9 @@ export default function FormEntregador() {
                                 color='orange'
                             >
                                 <Icon name='reply' />
-                                <Link to={'/list-entregador'}>Voltar</Link>
-
+                                Voltar
                             </Button>
+                            </Link>
 
                             <Button
                                 inverted

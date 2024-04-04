@@ -74,10 +74,9 @@ export default function ListProduto() {
                         circular
                         color='green'
                         title='Clique aqui para editar os dados deste produto'
-                        icon
-                      >
-                        <Icon name='edit' />
-                      </Button>{" "}
+                        icon>
+                        <Link to="/form-produto" state={{id: produto.id}} style={{color: 'green'}}> <Icon name='edit' /> </Link>
+                      </Button>
                       &nbsp;
                       <Button
                         inverted
