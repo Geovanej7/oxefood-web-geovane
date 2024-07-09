@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, useLocation } from "react-router-dom";
 import InputMask from 'react-input-mask';
-import { Button, Container, Divider, Form, Icon, FormSelect, FormRadio } from 'semantic-ui-react';
+import { Button, Container, Divider, Form, Icon, FormSelect} from 'semantic-ui-react';
 import MenuSistema from '../../MenuSistema';
 
 const ufList = [
@@ -96,15 +96,6 @@ export default function FormEntregador() {
                 .then((response) => { console.log('Entregador cadastrado com sucesso.') })
                 .catch((error) => { console.log('Erro ao incluir o Entregador.') })
         }
-
-
-        axios.post("http://localhost:8080/api/entregador", entregadorRequest)
-            .then((response) => {
-                console.log('Entregador cadastrado com sucesso.')
-            })
-            .catch((error) => {
-                console.log('Erro ao incluir o um Entregador.')
-            })
     }
 
 
@@ -120,7 +111,7 @@ export default function FormEntregador() {
                     {idEntregador === undefined &&
                         <h2> <span style={{ color: 'darkgray' }}> Entregador &nbsp;<Icon name='angle double right' size="small" /> </span> Cadastro</h2>
                     }
-                    {idEntregador != undefined &&
+                    {idEntregador !== undefined &&
                         <h2> <span style={{ color: 'darkgray' }}> Entregador &nbsp;<Icon name='angle double right' size="small" /> </span> Alteração</h2>
                     }
 

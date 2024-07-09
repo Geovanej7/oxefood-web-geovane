@@ -69,15 +69,6 @@ export default function FormCliente() {
           console.log("Erro ao incluir o cliente.")
         })
     }
-
-    axios
-      .post("http://localhost:8080/api/cliente", clienteRequest)
-      .then((response) => {
-        console.log("Cliente cadastrado com sucesso.")
-      })
-      .catch((error) => {
-        console.log("Erro ao incluir o um cliente.")
-      })
   }
 
   return (
@@ -100,7 +91,7 @@ export default function FormCliente() {
               Cadastro
             </h2>
           )}
-          {idCliente != undefined && (
+          {idCliente !== undefined && (
             <h2>
               {" "}
               <span style={{ color: "darkgray" }}>
