@@ -74,6 +74,7 @@ async function remover() {
               <Table.Header>
                 <Table.Row>
                   <Table.HeaderCell>Codigo</Table.HeaderCell>
+                  <Table.HeaderCell>Categoria</Table.HeaderCell>
                   <Table.HeaderCell>Titulo</Table.HeaderCell>
                   <Table.HeaderCell>Descricao</Table.HeaderCell>
                   <Table.HeaderCell>Valor Unitario</Table.HeaderCell>
@@ -88,6 +89,7 @@ async function remover() {
                 {lista.map((produto) => (
                   <Table.Row key={produto.id}>
                     <Table.Cell>{produto.codigo}</Table.Cell>
+                    <Table.Cell>{produto.categoria.descricao}</Table.Cell>
                     <Table.Cell>{produto.titulo}</Table.Cell>
                     <Table.Cell>{produto.descricao}</Table.Cell>
                     <Table.Cell>{produto.valorUnitario}</Table.Cell>
