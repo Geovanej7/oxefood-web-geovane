@@ -152,7 +152,7 @@ export default function ListProduto() {
                 {lista.map((produto) => (
                   <Table.Row key={produto.id}>
                     <Table.Cell>{produto.codigo}</Table.Cell>
-                    <Table.Cell>{produto.categoria.descricao}</Table.Cell>
+                    <Table.Cell>{produto.categoria ? produto.categoria.descricao : 'Sem Categoria'}</Table.Cell>
                     <Table.Cell>{produto.titulo}</Table.Cell>
                     <Table.Cell>{produto.descricao}</Table.Cell>
                     <Table.Cell>{produto.valorUnitario}</Table.Cell>
