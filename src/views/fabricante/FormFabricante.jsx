@@ -4,6 +4,7 @@ import InputMask from "react-input-mask"
 import { Link, useLocation } from "react-router-dom"
 import { Button, Container, Divider, Form, Icon } from "semantic-ui-react"
 import MenuSistema from "../../MenuSistema"
+import {mensagemErro, notifyError, notifySuccess } from '../../views/util/Util';
 
 export default function FormFabricante() {
     const { state } = useLocation()
@@ -55,20 +56,28 @@ export default function FormFabricante() {
         axios
           .put("http://localhost:8080/api/fabricante/" + idFabricante, fabricanteRequest)
           .then((response) => {
-            console.log("Fabricante alterado com sucesso.")
+            notifySuccess("Fabricante alterado com sucesso.")
           })
           .catch((error) => {
-            console.log("Erro ao alter um fabricante.")
+            if (error.response) {
+              notifyError(error.response.data.message)
+              } else {
+              notifyError(mensagemErro)
+              } 
           })
       } else {
         //Cadastro:
         axios
           .post("http://localhost:8080/api/fabricante", fabricanteRequest)
           .then((response) => {
-            console.log("Fabricante cadastrado com sucesso.")
+            notifySuccess("Fabricante cadastrado com sucesso.")
           })
           .catch((error) => {
-            console.log("Erro ao incluir o fabricante.")
+            if (error.response) {
+              notifyError(error.response.data.message)
+              } else {
+              notifyError(mensagemErro)
+              } 
           })
       }
     }

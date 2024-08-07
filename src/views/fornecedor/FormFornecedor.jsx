@@ -4,6 +4,7 @@ import InputMask from "react-input-mask"
 import { Link, useLocation } from "react-router-dom"
 import { Button, Container, Divider, Form, Icon } from "semantic-ui-react"
 import MenuSistema from "../../MenuSistema"
+import {mensagemErro, notifyError, notifySuccess } from '../../views/util/Util';
 
 export default function FormFornecedor(){
   const { state } = useLocation()
@@ -54,20 +55,28 @@ export default function FormFornecedor(){
       axios
         .put("http://localhost:8080/api/fornecedor/" + idFornecedor, fornecedorRequest)
         .then((response) => {
-          console.log("Fornecedor alterado com sucesso.")
+          notifySuccess("Fornecedor alterado com sucesso.")
         })
         .catch((error) => {
-          console.log("Erro ao alter um fornecedor.")
+          if (error.response) {
+            notifyError(error.response.data.message)
+            } else {
+            notifyError(mensagemErro)
+            } 
         })
     } else {
       //Cadastro:
       axios
         .post("http://localhost:8080/api/fornecedor", fornecedorRequest)
         .then((response) => {
-          console.log("Fornecedor cadastrado com sucesso.")
+          notifySuccess("Fornecedor cadastrado com sucesso.")
         })
         .catch((error) => {
-          console.log("Erro ao incluir o fornecedor.")
+          if (error.response) {
+            notifyError(error.response.data.message)
+            } else {
+            notifyError(mensagemErro)
+            } 
         })
     }
 }
